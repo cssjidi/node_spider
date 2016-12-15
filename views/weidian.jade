@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  include breadcrumb
+  form.form(action='/weidian',method='post')
+    p 
+    div.form-group
+      label(for='') 地址
+      textarea.form-control(name="text", cols="30", rows="10") https://weidian.com/item.html?itemID=1805504924&wfr=c&wfr=c
+    div.form-group
+      input.btn.btn-primary.btn-block(type="submit",value='提交')  

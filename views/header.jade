@@ -1,0 +1,16 @@
+header
+  section.wrap
+    nav.navbar.navbar-default.navbar-fixed-top(role='navigation')
+      div.container
+        div.navbar-header
+          a.navbar-brand 后台管理系统
+        div.collapse.navbar-collapse
+          ul.nav.navbar-nav
+            li(class='index'=='#{route}'?'active':null)
+              a(href='/') 首页
+            li(class='spider'=='#{route}'?'active':null)
+              a(href='/spider') 爬虫
+            li(class='user'=='#{route}'?'active':null)
+              a(href='/user') 插件
+            li(class='weidian'=='#{route}'?'active':null)
+              a(href='/weidian') 微店            

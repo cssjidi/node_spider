@@ -1,0 +1,42 @@
+extends layout
+
+block content
+  include breadcrumb
+  列表页选择器
+  分页格式
+  详细页选择器
+  图片保存路径
+  文本保存路径
+  form(role='form')
+    div.form-group
+      label(for='') 页面编码
+      input.form-control(type="text",placeholder='utf-8',value='gb2312')
+    div.form-group.form-group-inline
+      div.row
+        div.col-sm-6
+          label.form-label-inline(for='') 分页格式(数字用%%代替)
+          input.form-control-inline.form-control(type="text",value='http://www.baidu.com/page/%%')
+        div.col-sm-3
+          label.form-label-inline(for='') 从
+          input.form-control-inline.form-control(type="text",value='1')
+        div.col-sm-3
+          label.form-label-inline(for='') 到
+          input.form-control-inline.form-control(type="text",value='10')
+  form(method='post',action='/spider')
+    button(type='button',id='start',name='action',value='satrt',data-action='start') 开始爬取
+    button(type='button',id='stop',name='action',value='stop',data-action='stop') 停止爬取
+
+  script(src='//cdn.bootcss.com/jquery/3.1.1/jquery.min.js')
+  script(src="/socket.io/socket.io.js")
+  script.
+    var socket = io.connect('http://localhost:3000');
+    var start = document.getElementById('start');
+    start.addEventListener('click',function(){
+      socket.emit('message', { action: 'start' });
+    });
+    socket.on('message',function(data){
+    var msg = JSON.parse((typeof data === 'object' ? data:JSON.parse(data)).msg);
+    console.log(msg);
+    $('body').append('<div style="background-color:'+msg.color+'">'+msg.info+'</div>');
+    })
+    
