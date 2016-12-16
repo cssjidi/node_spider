@@ -1,42 +1,56 @@
 extends layout
 
 block content
-  include breadcrumb
-  列表页选择器
-  分页格式
-  详细页选择器
-  图片保存路径
-  文本保存路径
-  form(role='form')
-    div.form-group
-      label(for='') 页面编码
-      input.form-control(type="text",placeholder='utf-8',value='gb2312')
-    div.form-group.form-group-inline
-      div.row
-        div.col-sm-6
-          label.form-label-inline(for='') 分页格式(数字用%%代替)
-          input.form-control-inline.form-control(type="text",value='http://www.baidu.com/page/%%')
-        div.col-sm-3
-          label.form-label-inline(for='') 从
-          input.form-control-inline.form-control(type="text",value='1')
-        div.col-sm-3
-          label.form-label-inline(for='') 到
-          input.form-control-inline.form-control(type="text",value='10')
-  form(method='post',action='/spider')
-    button(type='button',id='start',name='action',value='satrt',data-action='start') 开始爬取
-    button(type='button',id='stop',name='action',value='stop',data-action='stop') 停止爬取
+    include breadcrumb
+    h3  规则设置
+    div
+        button.btn.btn-warning 保存
+        button.btn.btn-primary(type='button',id='start',name='action',value='satrt',data-action='start') 取消
+    form(role='form')
+        div.form-group
+            label(for='') 页面编码
+            input.form-control(type="text",placeholder='utf-8',value='gb2312')
+        div.form-group
+            label(for='') 分页格式(数字用%%代替)
+            input.form-control(type="text",value='http://www.baidu.com/page/%%')
+        div.form-group
+            div.row
+                div.col-sm-2
+                    label(for='') 从(开始页)
+                    input.form-control(type="text",value='1')
+                div.col-sm-2
+                    label(for='') 到(结束页)
+                    input.form-control(type="text",value='10')
+        div.form-group
+            label(for='') 分页选择器
+            input.form-control(type="text",placeholder='$("#div span")',value='$("#div span")')
+        div.form-group
+            label(for='') 详细页选择器&nbsp;&nbsp;&nbsp;
+                input(type="checkbox")
+                详细页分页
+            input.form-control(type="text",placeholder='$("#div span")',value='$("#div span")')
+        div.form-group
+            label(for='') 详细分页选择器
+            input.form-control(type="text",value='1')
+        div.form-group
+            label(for='') 图片和文本保存路径&nbsp;&nbsp;&nbsp;
+                input(type="checkbox",checked="checked",value='1')
+                是否生成html文件
+            input.form-control(type="text",placeholder='E:/picture',value='E:/picture')
+    form(method='post',action='/spider')
 
-  script(src='//cdn.bootcss.com/jquery/3.1.1/jquery.min.js')
-  script(src="/socket.io/socket.io.js")
-  script.
-    var socket = io.connect('http://localhost:3000');
-    var start = document.getElementById('start');
-    start.addEventListener('click',function(){
-      socket.emit('message', { action: 'start' });
-    });
-    socket.on('message',function(data){
-    var msg = JSON.parse((typeof data === 'object' ? data:JSON.parse(data)).msg);
-    console.log(msg);
-    $('body').append('<div style="background-color:'+msg.color+'">'+msg.info+'</div>');
-    })
+
+    script(src='//cdn.bootcss.com/jquery/3.1.1/jquery.min.js')
+    script(src="/socket.io/socket.io.js")
+    script.
+        var socket = io.connect('http://localhost:3000');
+        var start = document.getElementById('start');
+        start.addEventListener('click', function () {
+            socket.emit('message', {action: 'start'});
+        });
+        socket.on('message', function (data) {
+            var msg = JSON.parse((typeof data === 'object' ? data : JSON.parse(data)).msg);
+            console.log(msg);
+            $('body').append('<div style="background-color:' + msg.color + '">' + msg.info + '</div>');
+        })
     

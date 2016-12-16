@@ -23,7 +23,7 @@ router.get('/', function(req, res, next) {
   res.render('spider',{title:'爬虫',route:'spider'});
 });
 
-router.get('/list',function(req,res,next){
+router.get('/spider/list',function(req,res,next){
 	res.render('spider_list',{title:'爬虫规则列表',route:'spider'});
 })
 

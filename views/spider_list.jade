@@ -2,4 +2,15 @@ extends layout
 
 block content
   include breadcrumb
-    
+  div.panel.panel-default
+    div.panel-heading
+      h3 规则列表
+        a.btn.btn-warning.pull-right(href="/spider") 添加规则
+    table.table
+      thead
+        tr
+          td 规则名称
+          td 爬取网址
+          td 页数
+          td 保存路径
+          td 操作
