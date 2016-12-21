@@ -56,10 +56,15 @@
   }
 }
 
+.operation{
+  display:none;
+}
 
-
-
-
+.table-hover > tbody > tr:hover td{
+  .operation{
+    display:block;
+  }
+}
 
 
 

@@ -1,44 +1,42 @@
 extends layout
-
 block content
     include breadcrumb
     h3  规则设置
     div
-        button.btn.btn-warning 保存
-        button.btn.btn-primary(type='button',id='start',name='action',value='satrt',data-action='start') 取消
-    form(role='form')
+        button.btn.btn-warning(form="spider") 保存
+        a.btn.btn-primary(href="/spider/list") 取消
+    form#spider(role='form',method="post",action="/spider/post",name="spider")
         div.form-group
             label(for='') 页面编码
-            input.form-control(type="text",placeholder='utf-8',value='gb2312')
+            input.form-control(type="text",placeholder='utf-8',value='gb2312',name="chartset")
         div.form-group
             label(for='') 分页格式(数字用%%代替)
-            input.form-control(type="text",value='http://www.baidu.com/page/%%')
+            input.form-control(type="text",value='http://www.baidu.com/page/%%',name="page")
         div.form-group
             div.row
                 div.col-sm-2
                     label(for='') 从(开始页)
-                    input.form-control(type="text",value='1')
+                    input.form-control(type="text",value='1',name="start")
                 div.col-sm-2
                     label(for='') 到(结束页)
-                    input.form-control(type="text",value='10')
+                    input.form-control(type="text",value='10',name="end")
         div.form-group
             label(for='') 分页选择器
-            input.form-control(type="text",placeholder='$("#div span")',value='$("#div span")')
+            input.form-control(name="page_selector",type="text",placeholder='$("#div span")',value='$("#div span")')
         div.form-group
             label(for='') 详细页选择器&nbsp;&nbsp;&nbsp;
-                input(type="checkbox")
+                input(name="isPage",type="checkbox")
                 详细页分页
-            input.form-control(type="text",placeholder='$("#div span")',value='$("#div span")')
+            input.form-control(name="detail_selector",type="text",placeholder='$("#div span")',value='$("#div span")')
         div.form-group
             label(for='') 详细分页选择器
-            input.form-control(type="text",value='1')
+            input.form-control(name="detail_page_selector",type="text",value='1')
         div.form-group
             label(for='') 图片和文本保存路径&nbsp;&nbsp;&nbsp;
-                input(type="checkbox",checked="checked",value='1')
+                input(name="savePath",type="checkbox",checked="checked",value='1')
                 是否生成html文件
-            input.form-control(type="text",placeholder='E:/picture',value='E:/picture')
+            input.form-control(name="isHtml",type="text",placeholder='E:/picture',value='E:/picture')
     form(method='post',action='/spider')
-
 
     script(src='//cdn.bootcss.com/jquery/3.1.1/jquery.min.js')
     script(src="/socket.io/socket.io.js")

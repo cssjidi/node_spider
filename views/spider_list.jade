@@ -4,13 +4,23 @@ block content
   include breadcrumb
   div.panel.panel-default
     div.panel-heading
-      h3 规则列表
+      h3 规则列表asdf
         a.btn.btn-warning.pull-right(href="/spider") 添加规则
-    table.table
+    table.table.table-striped.table-bordered.table-hover
       thead
         tr
-          td 规则名称
-          td 爬取网址
-          td 页数
-          td 保存路径
-          td 操作
+          th 规则名称
+          th 爬取网址
+          th 页数
+          th 保存路径
+      - each item,key in lists
+        tr
+          td= item.page_selector
+          td= item.page
+          td= item.end - item.start
+          td= item.detail_page_selector
+            div.operation
+              a.btn.btn-default() 修改
+              a.btn.btn-warning() 删除
+
+

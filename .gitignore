@@ -5,3 +5,9 @@ node_modules
 .idea/*
 save
 save/*
+taobao.html
+start.bat
+socket.html
+socket.js
+weidian.js
+mongoose.js
